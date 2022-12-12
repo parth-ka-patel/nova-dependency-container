@@ -174,12 +174,7 @@ class NovaDependencyContainer extends Field
             }
 
             if (array_key_exists('value', $dependency)) {
-                if (is_array($resource)) {
-                    if (isset($resource[$dependency['property']]) && $dependency['value'] == $resource[$dependency['property']]) {
-                        $this->meta['dependencies'][$index]['satisfied'] = true;
-                    }
-                    continue;
-                } elseif ($dependency['value'] == $resource->{$dependency['property']}) {
+                if ($dependency['value'] == $resource->{$dependency['property']}) {
                     $this->meta['dependencies'][$index]['satisfied'] = true;
                     continue;
                 }

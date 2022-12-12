@@ -1,8 +1,19 @@
 let mix = require('laravel-mix')
+const path = require('path')
+require('./nova.mix')
 
-mix.js('resources/js/field.js', 'dist/js')
+mix
+    .setPublicPath('dist')
+    .js('resources/js/field.js', 'js')
+    .vue({ version: 3 })
+    .nova('64robots/nova-fields')
+    .alias({
+        '@': 'vendor/laravel/nova/resources/js/',
+    })
     .webpackConfig({
         resolve: {
-            symlinks: false
-        }
-    })
+            alias: {
+                'laravel-nova': path.resolve(__dirname, './node_modules/laravel-nova/dist/index.js'),
+            },
+        },
+    });
